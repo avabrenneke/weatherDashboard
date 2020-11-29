@@ -46,3 +46,22 @@ function currentWeather(city, apiKey) {
             }
         });
     };
+
+    //Current Weather Call
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).then(function (response) {
+        
+            cityName.text(response.name);
+            temp.text("Temperature: " + ((response.main.temp).toFixed(2) + "\xB0C"));
+            humidity.text("Humidity: " + response.main.humidity + "%");
+            wind.text("Wind Speed: " + response.wind.speed + " mph");
+
+        //latitude and longitude
+        lat = response.coord.lat;
+        lon = response.coord.lon;
+        //run the uv function
+        currentUV(lat, lon, apiKey);
+    })
+};
