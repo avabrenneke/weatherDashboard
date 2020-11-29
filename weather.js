@@ -85,3 +85,17 @@ function futureWeather(city, apiKey) {
         };
     })
 };
+//Run current weather and five day weather functions 
+searchBtn.on("click", function (event) {
+    event.preventDefault();
+    var city = searchBar.val();
+    currentWeather(city, apiKey);
+    futureWeather(city, apiKey);
+    /*attempted to set array and get array 
+    searchHistory.push(city);
+    localStorage.setItem("cityHistory", JSON.stringify(searchHistory));
+    localStorage.getItem("cityHistory");
+    $("#city-history").append("cityHistory"); */
+    searchHistory.push(city);
+    storeCities;
+});
