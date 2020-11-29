@@ -65,3 +65,23 @@ function currentWeather(city, apiKey) {
         currentUV(lat, lon, apiKey);
     })
 };
+// Five day forecast
+function futureWeather(city, apiKey) {
+    var queryURL3 = "http://api.openweathermap.org/data/2.5/forecast?q=" + city + "&units=imperial&appid=" + apiKey;
+
+    $.ajax({
+        url: queryURL3,
+        method: "GET"
+    }).then(function (response) {
+        // Forecast date
+        for (i = 5; i < 40; i += 8) {
+            var todayDate = $("<h5 class='card-title'>" + response.list[i].dt_txt + "</h5>")
+            var img = $("<img>").attr("src", "http://openweathermap.org/img/wn/" + response.list[i].weather[0].icon + "@2x.png")
+            var temp = $("<p>Temp: " + response.list[i].main.temp + "</p>")
+            var humidity = $("<p>Humidity: " + response.list[i].main.humidity + "%</p>")
+            index = (i + 3) / 8;
+            $("#future" + index).append(todayDate, img, temp, humidity);
+
+        };
+    })
+};
